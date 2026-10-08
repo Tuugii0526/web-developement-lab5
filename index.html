@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tuguldurn@lab4:~$</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    html { overflow-x: hidden; }
+
+    body {
+      margin: 0;
+      overflow-wrap: anywhere;
+      background: #0b0f14;
+      color: #c9d1d9;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    a { color: #58a6ff; text-decoration: none; }
+    kbd { color: #3fb950; font-family: inherit; font-weight: 700; }
+    pre { margin: 0; white-space: pre-wrap; font-family: inherit; }
+    h1, h2, h3 { margin: 0; color: #fff; }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.15rem; }
+    h3 { font-size: 0.95rem; }
+    p { margin: 0; }
+    mark {
+      padding: 0 6px;
+      color: #1b1f24;
+      background: #e3b341;
+      border-radius: 4px;
+    }
+
+    /* ---------- Mobile (default) ---------- */
+    header, footer {
+      padding: 16px;
+      background: #0b0f14;
+    }
+
+    header { display: grid; gap: 8px; }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* On mobile all sections are siblings so we can reorder them
+       (fortune goes right after the intro, as in the design). */
+    main, aside { display: contents; }
+    #about { order: 1; }
+    #fortune { order: 2; }
+    #skills { order: 3; }
+    #favorites { order: 4; }
+    #faq { order: 5; }
+    #contact { order: 6; }
+
+    section {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+      padding: 20px;
+      background: #0f151d;
+      border: 1px solid #1f2a37;
+      border-radius: 12px;
+    }
+
+    .cards { display: grid; gap: 16px; }
+
+    article {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      background: #0b0f14;
+      border: 1px solid #1f2a37;
+      border-radius: 8px;
+    }
+
+    article kbd { font-size: 0.95rem; }
+
+    meter {
+      width: 45%;
+      height: 6px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: #21262d;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    meter::-webkit-meter-bar { background: #21262d; border: 0; height: 6px; }
+    meter::-webkit-meter-optimum-value,
+    meter::-webkit-meter-suboptimum-value,
+    meter::-webkit-meter-even-less-good-value { background: #3fb950; border-radius: 999px; }
+    meter::-moz-meter-bar { background: #3fb950; }
+
+    blockquote {
+      margin: 0;
+      padding-left: 14px;
+      font-style: italic;
+      border-left: 3px solid #3fb950;
+    }
+
+    details {
+      padding: 12px 14px;
+      background: #0b0f14;
+      border: 1px solid #1f2a37;
+      border-radius: 8px;
+    }
+    details + details { margin-top: -4px; }
+    summary { cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "▸"; margin-right: 8px; color: #3fb950; font-size: 0.7em; }
+    details[open] summary::before { content: "▾"; }
+    details p { margin-top: 8px; }
+
+    form { display: grid; gap: 12px; }
+    label { display: grid; gap: 6px; }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px 12px;
+      font: inherit;
+      color: #1b1f24;
+      background: #fff;
+      border: 0;
+      border-radius: 6px;
+    }
+    textarea { resize: vertical; }
+    button { font-weight: 700; cursor: pointer; }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+    }
+    footer small { grid-column: 1 / -1; text-align: center; color: #8b949e; }
+    footer a { text-align: right; }
+
+    /* ---------- Tablet ---------- */
+    @media (min-width: 600px) {
+      body { font-size: 15px; }
+      header { grid-template-columns: auto 1fr; align-items: center; padding: 16px 24px; }
+      nav { justify-content: flex-end; }
+      .page { padding: 24px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      footer { padding: 16px 24px; grid-template-columns: 1fr auto auto; align-items: center; }
+      footer small { grid-column: auto; text-align: left; }
+    }
+
+    /* ---------- Desktop ---------- */
+    @media (min-width: 992px) {
+      .page { grid-template-columns: minmax(0, 1fr) 300px; }
+      main, aside { display: grid; gap: 24px; align-content: start; }
+      #about, #fortune, #skills, #favorites, #faq, #contact { order: 0; }
+      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <pre><kbd>tuguldurn@lab4:~$ whoami</kbd>
+Намжилдорж Төгөлдөр</pre>
+    <nav id="menu" aria-label="Хуудасны цэс">
+      <a href="#about">~/about</a>
+      <a href="#fortune">~/fortune</a>
+      <a href="#skills">~/skills</a>
+      <a href="#favorites">~/favorites</a>
+      <a href="#faq">~/faq</a>
+      <a href="#contact">~/contact</a>
+    </nav>
+  </header>
+
+  <div class="page">
+    <main>
+      <section id="about">
+        <h1>Сайн уу 👋</h1>
+        <p>
+          Намайг <strong>Намжилдорж Төгөлдөр</strong> гэдэг. Мэдээллийн
+          технологийн сургуульд <mark>3-р курст</mark> сурдаг. Шинэ зүйл
+          суралцах, бусдад сурсан мэдсэнээ хуваалцах дуртай 😇. Танилцахад
+          таатай байна. ✨
+        </p>
+      </section>
+
+      <section id="skills">
+        <h2>🧰 Юу мэддэг вэ?</h2>
+        <div class="cards">
+          <article>
+            <h3><kbd>./html_css</kbd></h3>
+            <p>Вэб хуудасны бүтэц, загварыг хийхэд ашигладаг.</p>
+            <meter min="0" max="10" value="6">6/10</meter>
+          </article>
+          <article>
+            <h3><kbd>./git_github</kbd></h3>
+            <p>
+              Кодоо байршуулахад ашигладаг.
+              <mark>GitHub Pages</mark> дээр кодоо үнэгүй байршуулдаг.
+            </p>
+            <meter min="0" max="10" value="4">4/10</meter>
+          </article>
+          <article>
+            <h3><kbd>./cpp</kbd></h3>
+            <p>
+              Програмчлалын бодлого бодох дуртай. Шинэ бүтэц, алгоритмаар
+              асуудал шийдэх нь сонирхолтой.
+            </p>
+            <meter min="0" max="10" value="3">3/10</meter>
+          </article>
+        </div>
+      </section>
+
+      <section id="favorites">
+        <h2>⭐ Дуртай зүйлс</h2>
+        <div class="cards">
+          <article>
+            <h3><kbd>language/</kbd></h3>
+            <p>Дуртай хэл: <strong>C++</strong></p>
+          </article>
+          <article>
+            <h3><kbd>frameworks/</kbd></h3>
+            <p>React · Vue · Next.js · Nuxt</p>
+          </article>
+          <article>
+            <h3><kbd>security/</kbd></h3>
+            <p>CTF тэмцээн</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2>💬 Асуулт хариулт</h2>
+        <details>
+          <summary>Яагаад вэб хөгжүүлэлт сонирхдог вэ?</summary>
+          <p>
+            Код бичээд хөтөч дээр үр дүнг нь шууд харж болдог нь надад
+            таалагддаг.
+          </p>
+        </details>
+        <details>
+          <summary>Одоо юу сурч байна вэ?</summary>
+          <p>
+            Япон хэл <strong>dekiru nihongo</strong> номноос сурж байгаа.
+            Ирэх 12 сард N5 шалгалт өгнө.
+          </p>
+        </details>
+        <details>
+          <summary>Ойрын зорилго</summary>
+          <p>OverTheWire-ийн CTF дасгалуудыг шийдэх зорилготой.</p>
+        </details>
+      </section>
+    </main>
+
+    <aside>
+      <section id="fortune">
+        <h2><kbd>$ fortune</kbd></h2>
+        <blockquote>“Оролдлого ихт оройд нь”</blockquote>
+      </section>
+
+      <section id="contact">
+        <h2>📬 Холбоо барих</h2>
+        <p>
+          <a href="https://github.com/Tuugii0526" target="_blank" rel="noopener">github.com/Tuugii0526</a>
+        </p>
+        <form onsubmit="return false;">
+          <label>Нэр: <input type="text" name="name" /></label>
+          <label>Захиа: <textarea name="msg" rows="3"></textarea></label>
+          <button type="submit">Явуулах</button>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  <footer>
+    <pre><kbd>$ exit</kbd>
+logout</pre>
+    <small>© 2026 Намжилдорж Төгөлдөр</small>
+    <a href="#about">↑ дээш гарах</a>
+  </footer>
+
+</body>
+
+</html>
