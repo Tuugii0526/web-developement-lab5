@@ -13,35 +13,58 @@
     body {
       margin: 0;
       overflow-wrap: anywhere;
-      background: #0b0f14;
+      background:
+        radial-gradient(900px 500px at 0% 0%, rgba(168, 85, 247, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 20%, rgba(56, 189, 248, 0.16), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(244, 114, 182, 0.14), transparent 60%),
+        #0b0f14;
+      background-attachment: fixed;
       color: #c9d1d9;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    a { color: #58a6ff; text-decoration: none; }
-    kbd { color: #3fb950; font-family: inherit; font-weight: 700; }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { color: #f472b6; }
+    kbd { color: #34d399; font-family: inherit; font-weight: 700; }
     pre { margin: 0; white-space: pre-wrap; font-family: inherit; }
     h1, h2, h3 { margin: 0; color: #fff; }
-    h1 { font-size: 1.5rem; }
+    h1 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #f472b6, #a78bfa, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
     h2 { font-size: 1.15rem; }
     h3 { font-size: 0.95rem; }
     p { margin: 0; }
     mark {
       padding: 0 6px;
       color: #1b1f24;
-      background: #e3b341;
+      background: linear-gradient(90deg, #fde047, #fb923c);
       border-radius: 4px;
     }
 
     /* ---------- Mobile (default) ---------- */
     header, footer {
       padding: 16px;
-      background: #0b0f14;
+      background: rgba(11, 15, 20, 0.75);
+      backdrop-filter: blur(6px);
     }
+    header { border-bottom: 3px solid transparent; border-image: linear-gradient(90deg, #f472b6, #a78bfa, #38bdf8, #34d399) 1; }
+    footer { border-top: 1px solid #1f2a37; }
 
     header { display: grid; gap: 8px; }
+
+    nav a:nth-child(1) { color: #34d399; }
+    nav a:nth-child(2) { color: #f472b6; }
+    nav a:nth-child(3) { color: #38bdf8; }
+    nav a:nth-child(4) { color: #fbbf24; }
+    nav a:nth-child(5) { color: #a78bfa; }
+    nav a:nth-child(6) { color: #fb923c; }
+    nav a:hover { text-decoration: underline; }
 
     nav {
       display: flex;
@@ -69,14 +92,25 @@
     #contact { order: 6; }
 
     section {
+      --accent: #34d399;
       display: grid;
       gap: 16px;
       align-content: start;
       padding: 20px;
-      background: #0f151d;
-      border: 1px solid #1f2a37;
+      background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, #0f151d), #0f151d 55%);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, #1f2a37);
+      border-top: 4px solid var(--accent);
       border-radius: 12px;
+      box-shadow: 0 6px 24px color-mix(in srgb, var(--accent) 12%, transparent);
     }
+    section h2 { color: var(--accent); }
+    section kbd { color: var(--accent); }
+    #about { --accent: #34d399; }
+    #fortune { --accent: #f472b6; }
+    #skills { --accent: #38bdf8; }
+    #favorites { --accent: #fbbf24; }
+    #faq { --accent: #a78bfa; }
+    #contact { --accent: #fb923c; }
 
     .cards { display: grid; gap: 16px; }
 
@@ -84,10 +118,12 @@
       display: grid;
       gap: 10px;
       padding: 16px;
-      background: #0b0f14;
-      border: 1px solid #1f2a37;
+      background: rgba(11, 15, 20, 0.7);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, #1f2a37);
       border-radius: 8px;
+      transition: transform 0.15s, border-color 0.15s;
     }
+    article:hover { transform: translateY(-2px); border-color: var(--accent); }
 
     article kbd { font-size: 0.95rem; }
 
@@ -103,26 +139,26 @@
     meter::-webkit-meter-bar { background: #21262d; border: 0; height: 6px; }
     meter::-webkit-meter-optimum-value,
     meter::-webkit-meter-suboptimum-value,
-    meter::-webkit-meter-even-less-good-value { background: #3fb950; border-radius: 999px; }
-    meter::-moz-meter-bar { background: #3fb950; }
+    meter::-webkit-meter-even-less-good-value { background: linear-gradient(90deg, #38bdf8, #a78bfa, #f472b6); border-radius: 999px; }
+    meter::-moz-meter-bar { background: linear-gradient(90deg, #38bdf8, #a78bfa, #f472b6); }
 
     blockquote {
       margin: 0;
       padding-left: 14px;
       font-style: italic;
-      border-left: 3px solid #3fb950;
+      border-left: 3px solid var(--accent);
     }
 
     details {
       padding: 12px 14px;
-      background: #0b0f14;
-      border: 1px solid #1f2a37;
+      background: rgba(11, 15, 20, 0.7);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, #1f2a37);
       border-radius: 8px;
     }
     details + details { margin-top: -4px; }
     summary { cursor: pointer; list-style: none; }
     summary::-webkit-details-marker { display: none; }
-    summary::before { content: "▸"; margin-right: 8px; color: #3fb950; font-size: 0.7em; }
+    summary::before { content: "▸"; margin-right: 8px; color: var(--accent); font-size: 0.7em; }
     details[open] summary::before { content: "▾"; }
     details p { margin-top: 8px; }
 
@@ -139,6 +175,12 @@
     }
     textarea { resize: vertical; }
     button { font-weight: 700; cursor: pointer; }
+    form button {
+      color: #0b0f14;
+      background: linear-gradient(90deg, #fb923c, #f472b6);
+    }
+    form button:hover { filter: brightness(1.1); }
+    input:focus, textarea:focus { outline: 2px solid #fb923c; }
 
     footer {
       display: grid;
@@ -167,10 +209,60 @@
       #about, #fortune, #skills, #favorites, #faq, #contact { order: 0; }
       .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
+    /* ---------- Device switcher ---------- */
+    .switcher {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 10px 16px;
+      background: #0b0f14;
+      border-bottom: 1px solid #1f2a37;
+    }
+    .switcher button {
+      width: auto;
+      padding: 8px 16px;
+      color: #c9d1d9;
+      background: #0f151d;
+      border: 1px solid #1f2a37;
+    }
+    .switcher button[aria-pressed="true"] {
+      color: #0b0f14;
+      background: linear-gradient(90deg, #a78bfa, #38bdf8);
+      border-color: transparent;
+    }
+    .device-frame {
+      display: block;
+      width: 100%;
+      height: calc(100vh - 56px);
+      margin: 0 auto;
+      border: 0;
+      background: #0b0f14;
+    }
+    .device-frame.is-mobile,
+    .device-frame.is-tablet {
+      height: calc(100vh - 56px - 32px);
+      margin-top: 16px;
+      border: 1px solid #1f2a37;
+      border-radius: 12px;
+    }
+    .device-frame.is-mobile { width: 375px; max-width: 100%; }
+    .device-frame.is-tablet { width: 768px; max-width: 100%; }
+    .switcher[hidden], .device-frame[hidden], #site[hidden] { display: none; }
   </style>
 </head>
 
 <body>
+  <div class="switcher" role="group" aria-label="Төхөөрөмжийн хэмжээ" hidden>
+    <button type="button" data-device="mobile" aria-pressed="false">📱 Mobile</button>
+    <button type="button" data-device="tablet" aria-pressed="false">📲 Tablet</button>
+    <button type="button" data-device="desktop" aria-pressed="true">🖥️ Desktop</button>
+  </div>
+  <iframe class="device-frame" title="Хуудасны урьдчилан харалт" hidden></iframe>
+
+  <div id="site">
   <header>
     <pre><kbd>tuguldurn@lab4:~$ whoami</kbd>
 Намжилдорж Төгөлдөр</pre>
@@ -293,7 +385,36 @@ logout</pre>
     <small>© 2026 Намжилдорж Төгөлдөр</small>
     <a href="#about">↑ дээш гарах</a>
   </footer>
+  </div>
 
+  <script>
+    (function () {
+      // Inside the preview frame: show the plain page.
+      if (new URLSearchParams(location.search).has('embed')) return;
+
+      var switcher = document.querySelector('.switcher');
+      var frame = document.querySelector('.device-frame');
+      var site = document.getElementById('site');
+      var buttons = switcher.querySelectorAll('button');
+
+      frame.src = location.pathname + '?embed';
+      switcher.hidden = false;
+      frame.hidden = false;
+      site.hidden = true;
+
+      function select(device) {
+        frame.className = 'device-frame is-' + device;
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.device === device));
+        });
+      }
+
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { select(b.dataset.device); });
+      });
+      select('desktop');
+    })();
+  </script>
 </body>
 
 </html>
